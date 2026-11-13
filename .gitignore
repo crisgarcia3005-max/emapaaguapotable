@@ -1,0 +1,23 @@
+# Dependencias (se reinstalan con npm install)
+node_modules/
+
+# Secretos: nunca subir. Usar .env.example como plantilla
+.env
+.env.*
+!.env.example
+
+# Expo
+.expo/
+dist/
+web-build/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.*

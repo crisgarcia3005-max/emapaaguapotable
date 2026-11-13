@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "EMAPA Ibarra",
+    "slug": "emapa-ibarra",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false
+    },
+    "android": {},
+    "plugins": [
+      "expo-secure-store",
+      "expo-notifications"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "2169e403-56f3-412d-a9aa-96d52685539a"
+      }
+    },
+    "owner": "cgarcia3005"
+  }
+}

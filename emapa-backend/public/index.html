@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel EMAPA Ibarra</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Inicio de sesión -->
+  <main id="login-view" class="login" hidden>
+    <form id="login-form" class="card">
+      <h1>EMAPA Ibarra</h1>
+      <p class="muted">Panel de administración</p>
+      <label for="login-id">Usuario</label>
+      <input id="login-id" autocomplete="username" required value="admin" />
+      <label for="login-pass">Contraseña</label>
+      <input id="login-pass" type="password" autocomplete="current-password" required />
+      <button type="submit">Entrar</button>
+      <p id="login-error" class="error" role="alert"></p>
+    </form>
+  </main>
+
+  <!-- Panel -->
+  <div id="app-view" hidden>
+    <header>
+      <strong>EMAPA Ibarra · Administración</strong>
+      <nav aria-label="Secciones">
+        <button class="tab active" data-tab="resumen">Resumen</button>
+        <button class="tab" data-tab="cortes">Cortes y fallas</button>
+        <button class="tab" data-tab="calidad">Calidad del agua</button>
+        <button class="tab" data-tab="tramites">Trámites</button>
+      </nav>
+      <button id="logout" class="link">Salir</button>
+    </header>
+
+    <main class="content">
+      <p id="toast" class="toast" role="status" aria-live="polite" hidden></p>
+
+      <!-- Resumen -->
+      <section id="tab-resumen">
+        <h2>Resumen</h2>
+        <div id="stats" class="stats"></div>
+      </section>
+
+      <!-- Cortes -->
+      <section id="tab-cortes" hidden>
+        <h2>Publicar corte o falla</h2>
+        <form id="incident-form" class="card">
+          <fieldset>
+            <legend>Sectores afectados</legend>
+            <div id="incident-sectors" class="checks"></div>
+          </fieldset>
+          <div class="row">
+            <div>
+              <label for="inc-type">Tipo</label>
+              <select id="inc-type">
+                <option value="corte_programado">Corte programado</option>
+                <option value="falla">Falla</option>
+                <option value="baja_presion">Baja presión</option>
+              </select>
+            </div>
+            <div>
+              <label for="inc-start">Inicio</label>
+              <input id="inc-start" type="datetime-local" required />
+            </div>
+            <div>
+              <label for="inc-end">Restablecimiento estimado</label>
+              <input id="inc-end" type="datetime-local" required />
+            </div>
+          </div>
+          <label for="inc-title">Título</label>
+          <input id="inc-title" required minlength="3" maxlength="100" placeholder="Ej. Mantenimiento de red" />
+          <label for="inc-desc">Descripción</label>
+          <textarea id="inc-desc" maxlength="500" rows="3" placeholder="Calles afectadas, recomendaciones…"></textarea>
+          <button type="submit">Publicar y notificar</button>
+          <p class="muted">Se enviará una notificación a todos los usuarios de los sectores seleccionados.</p>
+        </form>
+
+        <h2>Incidentes</h2>
+        <table>
+          <thead><tr><th>Tipo</th><th>Título</th><th>Sectores</th><th>Inicio</th><th>Fin estimado</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="incidents-body"></tbody>
+        </table>
+      </section>
+
+      <!-- Calidad -->
+      <section id="tab-calidad" hidden>
+        <h2>Calidad del agua por sector</h2>
+        <p class="muted">Rangos de referencia: cloro 0.3–1.5 mg/L · pH 6.5–8.5 · turbidez ≤ 5 NTU.
+          Si los valores quedan fuera de norma se alerta automáticamente al sector.</p>
+        <table>
+          <thead><tr><th>Sector</th><th>Cloro (mg/L)</th><th>pH</th><th>Turbidez (NTU)</th><th>Estado</th><th>Actualizado</th><th></th></tr></thead>
+          <tbody id="quality-body"></tbody>
+        </table>
+      </section>
+
+      <!-- Trámites -->
+      <section id="tab-tramites" hidden>
+        <h2>Trámites recibidos</h2>
+        <table>
+          <thead><tr><th>N.º</th><th>Tipo</th><th>Ciudadano</th><th>Cuenta</th><th>Detalle</th><th>Fecha</th><th>Estado</th></tr></thead>
+          <tbody id="procedures-body"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
